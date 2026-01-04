@@ -16,13 +16,14 @@ public class DemoJdbc {
         String url = "jdbc:postgresql://localhost:5432/demo";
         String uname = "postgres";
         String pass = "0000";
-        String sql = "select * from student";
+        String sql = "delete from student where sid = 5";
 
 //        Class.forName("org.postgresql.Driver"); // optional
         Connection con = DriverManager.getConnection(url, uname, pass);
         System.out.println("Connection Established");
         Statement st = con.createStatement();
-        ResultSet rs = st.executeQuery(sql);
+
+        /*ResultSet rs = st.executeQuery(sql);
 //        System.out.println(rs.next());
 
 //        rs.next();
@@ -33,7 +34,12 @@ public class DemoJdbc {
             System.out.print(rs.getInt(1) + " - ");
             System.out.print(rs.getString(2) + " - ");
             System.out.println(rs.getInt(3));
-        }
+        }*/
+
+        /*boolean status = st.execute(sql);
+        System.out.println(status);*/
+
+        st.execute(sql);
 
         con.close();
         System.out.println("Connection Closed");
