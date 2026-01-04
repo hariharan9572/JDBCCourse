@@ -13,19 +13,25 @@ public class DemoJdbc {
             close
         */
 
-        int sid = 101;
-        String sname = "Anbazhagan";
-        int marks = 65;
+        int sid = 102;
+        String sname = "Max";
+        int marks = 52;
 
         String url = "jdbc:postgresql://localhost:5432/demo";
         String uname = "postgres";
         String pass = "0000";
-        String sql = "insert into student values (" + sid + ", '" + sname + "', " + marks +")";
+//        String sql = "insert into student values (" + sid + ", '" + sname + "', " + marks +")";
+        String sql = "insert into student values (?,?,?)";
 
 //        Class.forName("org.postgresql.Driver"); // optional
         Connection con = DriverManager.getConnection(url, uname, pass);
-        System.out.println("Connection Established");
-        Statement st = con.createStatement();
+//        System.out.println("Connection Established");
+//        Statement st = con.createStatement();
+
+        PreparedStatement st = con.prepareStatement(sql);
+        st.setInt(1, sid);
+        st.setString(2, sname);
+        st.setInt(3, marks);
 
         /*ResultSet rs = st.executeQuery(sql);
 //        System.out.println(rs.next());
@@ -43,10 +49,11 @@ public class DemoJdbc {
         /*boolean status = st.execute(sql);
         System.out.println(status);*/
 
-        st.execute(sql);
+//        st.execute(sql);
+        st.execute();
 
         con.close();
-        System.out.println("Connection Closed");
+//        System.out.println("Connection Closed");
 
 
 
